@@ -9,6 +9,12 @@ metadata:
     tanzu.app.live.view.application.flavours: steeltoe
     tanzu.app.live.view.application.name:  books-dotnet-app
 spec:
+  serviceClaims:
+  - name: books-db
+    ref:
+      apiVersion: v1
+      name: a4ab4d20-94e7-4f09-baa1-9a6d827dad38
+      kind: Secret
   params:
   - name: annotations
     value:
