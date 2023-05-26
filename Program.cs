@@ -8,7 +8,7 @@ using Steeltoe.Common.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddKubernetesConfiguration();
+//builder.AddKubernetesConfiguration();
 builder.UseCloudHosting();
 
 // Add services to the container.
