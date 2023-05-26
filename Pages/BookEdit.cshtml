@@ -1,0 +1,29 @@
+@page "/Books/{id}"
+@model RazorApp.Pages.BookEdit
+
+<form method="post">
+    <div class="row">
+        <div class="col-1">
+            <label>Name</label>
+        </div>
+        <div class="col-4">
+            <input type="text" name="name" class="form-control" value="@Model.book.Name" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <label>Author</label>
+        </div>
+        <div class="col-4">
+            <input type="text" name="author" class="form-control input-lg" value="@Model.book.Author" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <input type="submit" class="btn btn-primary" value="Save"/>
+        </div>
+        <div class="col-1 offset-1">
+            <input type="submit" asp-page-handler="Delete" class="btn btn-danger" value="Delete" />
+        </div>
+    </div>
+</form>

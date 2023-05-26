@@ -1,0 +1,28 @@
+@page "/Books/New"
+@model RazorApp.Pages.BookNew
+
+<h1>Add Book</h1>
+
+<form method="post">
+    <div class="row">
+        <div class="col-1">
+            <label>Name</label>
+        </div>
+        <div class="col-4">
+            <input type="text" name="name" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <label>Author</label>
+        </div>
+        <div class="col-4">
+            <input type="text" name="author" class="form-control input-lg" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <input type="submit" class="btn btn-primary" value="Save"/>
+        </div>
+    </div>
+</form>
