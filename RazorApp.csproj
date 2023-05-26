@@ -16,6 +16,7 @@
     <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="3.2.3" />
     <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.2.3" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.2.3" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.KubernetesCore" Version="3.2.3" />
     <PackageReference Include="Steeltoe.Management.TaskCore" Version="3.2.3" />
   </ItemGroup>
 
