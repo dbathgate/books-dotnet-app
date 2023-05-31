@@ -5,6 +5,10 @@ using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Management.TaskCore;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Connector.EFCore;
+using Steeltoe.Connector.MySql;
+using Steeltoe.Common.Reflection;
+using Steeltoe.Connector;
+using Steeltoe.Connector.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +23,14 @@ builder.Services.AddTask<MigrateDbContextTask<BookDbContext>>(ServiceLifetime.Tr
 foreach(var config in builder.Configuration.AsEnumerable()) {
     Console.WriteLine($"{config.Key} = {config.Value}");
 }
+
+var info = builder.Configuration.GetSingletonServiceInfo<MySqlServiceInfo>();
+var mySqlConnection = ReflectionHelpers.FindType(MySqlTypeLocator.Assemblies, MySqlTypeLocator.ConnectionTypeNames); 
+var mySqlConfig = new MySqlProviderConnectorOptions(builder.Configuration);
+var factory = new MySqlProviderConnectorFactory(info, mySqlConfig, mySqlConnection);
+
+
+Console.WriteLine($"Connection String: {factory.CreateConnectionString()}");
 
 var app = builder.Build();
 
