@@ -1,14 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using RazorApp.Repository;
-using Steeltoe.Connector.EFCore;
-using Steeltoe.Extensions.Configuration.Kubernetes;
+using Steeltoe.Extensions.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Management.TaskCore;
 using Steeltoe.Common.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddKubernetesConfiguration();
+builder.Configuration.AddKubernetesServiceBindings();
 builder.UseCloudHosting();
 
 // Add services to the container.
