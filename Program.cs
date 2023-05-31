@@ -24,7 +24,7 @@ foreach(var config in builder.Configuration.AsEnumerable()) {
     Console.WriteLine($"{config.Key} = {config.Value}");
 }
 
-var info = builder.Configuration.GetSingletonServiceInfo<MySqlServiceInfo>();
+var info = builder.Configuration.GetRequiredServiceInfo<MySqlServiceInfo>("books-db");
 var mySqlConnection = ReflectionHelpers.FindType(MySqlTypeLocator.Assemblies, MySqlTypeLocator.ConnectionTypeNames); 
 var mySqlConfig = new MySqlProviderConnectorOptions(builder.Configuration);
 var factory = new MySqlProviderConnectorFactory(info, mySqlConfig, mySqlConnection);
