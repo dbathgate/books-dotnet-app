@@ -3,7 +3,7 @@ using RazorApp.Repository;
 using Steeltoe.Extensions.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Management.TaskCore;
 using Steeltoe.Common.Hosting;
-using Steeltoe.Connector.MySql.EFCore;
+using Steeltoe.Connector.PostgreSql.EFCore;
 using Steeltoe.Connector.EFCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +17,7 @@ builder.Services.AddRazorPages();
 var mysqlOptions = builder.Configuration.GetSection("k8s:bindings:books-db");
 var connectionString = $"Server={mysqlOptions["host"]}; Port={mysqlOptions["port"]}; Database={mysqlOptions["database"]}; Uid={mysqlOptions["username"]}; Pwd={mysqlOptions["password"]}";
 
-builder.Services.AddDbContext<BookDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<BookDbContext>(options => options.UseNpgsql(builder.Configuration));
 // builder.Services.AddDbContext<BookDbContext>(options => options.UseMySql(builder.Configuration));
 builder.Services.AddTask<MigrateDbContextTask<BookDbContext>>(ServiceLifetime.Transient);
 
