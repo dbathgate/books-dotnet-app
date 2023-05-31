@@ -21,6 +21,9 @@ builder.Services.AddDbContext<BookDbContext>(options => options.UseNpgsql(builde
 // builder.Services.AddDbContext<BookDbContext>(options => options.UseMySql(builder.Configuration));
 builder.Services.AddTask<MigrateDbContextTask<BookDbContext>>(ServiceLifetime.Transient);
 
+
+Console.WriteLine($"My Secret {builder.Configuration["k8s:bindings:my-secret:password"]}");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
