@@ -4,6 +4,7 @@ using Steeltoe.Extensions.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Management.TaskCore;
 using Steeltoe.Common.Hosting;
+using Steeltoe.Connector.EFCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,7 @@ builder.UseCloudHosting();
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<BookDbContext>(options => options.UseMySql(builder.Configuration));
-//builder.Services.AddTask<MigrateDbContextTask<BookDbContext>>();
+builder.Services.AddTask<MigrateDbContextTask<BookDbContext>>(ServiceLifetime.Transient);
 
 foreach(var config in builder.Configuration.AsEnumerable()) {
     Console.WriteLine($"{config.Key} = {config.Value}");
