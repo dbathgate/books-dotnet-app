@@ -4,12 +4,12 @@ ADD . /app
 
 WORKDIR /app
 
-RUN dotnet publish -c Release --self-contained -r linux-x64 -o publish
+RUN dotnet publish -c Release -o publish
 
-FROM alpine
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 
 COPY --from=builder /app/publish /app
 
 WORKDIR /app
 
-CMD ["./RazorApp", "--urls", "http://0.0.0.0:8080"]
+CMD ["dotnet", "RazorApp.dll", "--urls", "http://0.0.0.0:8080"]
