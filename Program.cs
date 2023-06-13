@@ -14,15 +14,12 @@ builder.UseCloudHosting();
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-var mysqlOptions = builder.Configuration.GetSection("k8s:bindings:books-db");
-var connectionString = $"Server={mysqlOptions["host"]}; Port={mysqlOptions["port"]}; Database={mysqlOptions["database"]}; Uid={mysqlOptions["username"]}; Pwd={mysqlOptions["password"]}";
-
 builder.Services.AddDbContext<BookDbContext>(options => options.UseNpgsql(builder.Configuration));
-// builder.Services.AddDbContext<BookDbContext>(options => options.UseMySql(builder.Configuration));
 builder.Services.AddTask<MigrateDbContextTask<BookDbContext>>(ServiceLifetime.Transient);
 
-
-Console.WriteLine($"My Secret {builder.Configuration["k8s:bindings:my-secret:password"]}");
+foreach(var config in builder.Configuration.AsEnumerable()) {
+    Console.WriteLine($"{config.Key} = {config.Value}");
+}
 
 var app = builder.Build();
 
