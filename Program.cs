@@ -5,6 +5,7 @@ using Steeltoe.Management.TaskCore;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Connector.PostgreSql.EFCore;
 using Steeltoe.Connector.EFCore;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,9 @@ builder.Configuration.AddKubernetesServiceBindings();
 builder.UseCloudHosting();
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(o => {
+    o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
+});
 
 builder.Services.AddDbContext<BookDbContext>(options => options.UseNpgsql(builder.Configuration));
 builder.Services.AddTask<MigrateDbContextTask<BookDbContext>>(ServiceLifetime.Transient);
