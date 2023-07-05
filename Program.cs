@@ -3,13 +3,17 @@ using RazorApp.Repository;
 using Steeltoe.Extensions.Configuration.Kubernetes.ServiceBinding;
 using Steeltoe.Management.TaskCore;
 using Steeltoe.Common.Hosting;
-using Steeltoe.Connector.PostgreSql.EFCore;
+using Steeltoe.Connector.MySql.EFCore;
 using Steeltoe.Connector.EFCore;
 using Microsoft.AspNetCore.Mvc;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddKubernetesServiceBindings();
+builder.Configuration.AddEnvironmentVariables();
+
+builder.AddCloudFoundryConfiguration();
 builder.UseCloudHosting();
 
 // Add services to the container.
@@ -17,7 +21,7 @@ builder.Services.AddRazorPages(o => {
     o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
 });
 
-builder.Services.AddDbContext<BookDbContext>(options => options.UseNpgsql(builder.Configuration));
+builder.Services.AddDbContext<BookDbContext>(options => options.UseMySql(builder.Configuration));
 builder.Services.AddTask<MigrateDbContextTask<BookDbContext>>(ServiceLifetime.Transient);
 
 foreach(var config in builder.Configuration.AsEnumerable()) {

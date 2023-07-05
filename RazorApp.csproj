@@ -11,10 +11,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     <PackageReference Include="Steeltoe.Common.Hosting" Version="3.2.3" />
     <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="3.2.3" />
-    <!-- <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="3.2.3" /> -->
+    <PackageReference Include="Steeltoe.Connector.CloudFoundry" Version="3.2.3" />
     <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.2.3" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="3.2.3" />
     <PackageReference Include="Steeltoe.Extensions.Configuration.Kubernetes.ServiceBinding" Version="3.2.3" />

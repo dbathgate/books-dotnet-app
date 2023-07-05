@@ -1,0 +1,7 @@
+applications:
+- name: BooksApp
+  buildpacks:
+  - binary_buildpack
+  command: "./RazorApp"
+  path: publish
+  memory: 256m
